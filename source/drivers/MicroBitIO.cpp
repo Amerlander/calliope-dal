@@ -4,6 +4,10 @@ The MIT License (MIT)
 Copyright (c) 2016 British Broadcasting Corporation.
 This software is provided by Lancaster University by arrangement with the BBC.
 
+Modifications Copyright (c) 2016 Calliope gGmbH
+Modifications are provided by DELTA Systems (Georg Sommer) - Thomas Kern
+und Björn Eberhardt GbR by arrangement with Calliope GbR.
+
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
 to deal in the Software without restriction, including without limitation
@@ -46,25 +50,37 @@ MicroBitIO::MicroBitIO(int ID_P0, int ID_P1, int ID_P2,
                        int ID_P9, int ID_P10,int ID_P11,
                        int ID_P12,int ID_P13,int ID_P14,
                        int ID_P15,int ID_P16,int ID_P19,
-                       int ID_P20) :
-    P0 (ID_P0, MICROBIT_PIN_P0, PIN_CAPABILITY_ALL),             //P0 is the left most pad (ANALOG/DIGITAL/TOUCH)
-    P1 (ID_P1, MICROBIT_PIN_P1, PIN_CAPABILITY_ALL),             //P1 is the middle pad (ANALOG/DIGITAL/TOUCH)
-    P2 (ID_P2, MICROBIT_PIN_P2, PIN_CAPABILITY_ALL),             //P2 is the right most pad (ANALOG/DIGITAL/TOUCH)
+                       int ID_P20
+#ifdef TARGET_NRF51_CALLIOPE
+                       , int ID_P21
+#endif
+    ) :
+    P0 (ID_P0, MICROBIT_PIN_P0, PIN_CAPABILITY_ALL),             //P0 is the left most pad (ANALOG/DIGITAL/TOUCH) (CM: P1)
+    P1 (ID_P1, MICROBIT_PIN_P1, PIN_CAPABILITY_ALL),             //P1 is the middle pad (ANALOG/DIGITAL/TOUCH)    (CM: P2)
+    P2 (ID_P2, MICROBIT_PIN_P2, PIN_CAPABILITY_ALL),             //P2 is the right most pad (ANALOG/DIGITAL/TOUCH)(CM: RX)
     P3 (ID_P3, MICROBIT_PIN_P3, PIN_CAPABILITY_ALL),             //COL1 (ANALOG/DIGITAL)
     P4 (ID_P4, MICROBIT_PIN_P4, PIN_CAPABILITY_ALL),             //COL2 (ANALOG/DIGITAL)
     P5 (ID_P5, MICROBIT_PIN_P5, PIN_CAPABILITY_STANDARD),        //BTN_A
     P6 (ID_P6, MICROBIT_PIN_P6, PIN_CAPABILITY_STANDARD),        //ROW2
     P7 (ID_P7, MICROBIT_PIN_P7, PIN_CAPABILITY_STANDARD),        //ROW1
+#ifdef TARGET_NRF51_CALLIOPE
+    P8 (ID_P8, MICROBIT_PIN_P8, PIN_CAPABILITY_ALL),             // (CM: TX/Analog)
+#else
     P8 (ID_P8, MICROBIT_PIN_P8, PIN_CAPABILITY_STANDARD),        //PIN 18
+#endif
     P9 (ID_P9, MICROBIT_PIN_P9, PIN_CAPABILITY_STANDARD),        //ROW3
     P10(ID_P10,MICROBIT_PIN_P10,PIN_CAPABILITY_ALL),             //COL3 (ANALOG/DIGITAL)
     P11(ID_P11,MICROBIT_PIN_P11,PIN_CAPABILITY_STANDARD),        //BTN_B
-    P12(ID_P12,MICROBIT_PIN_P12,PIN_CAPABILITY_STANDARD),        //PIN 20
+    P12(ID_P12,MICROBIT_PIN_P12,PIN_CAPABILITY_STANDARD),        //PIN 20 (CM: P0)
     P13(ID_P13,MICROBIT_PIN_P13,PIN_CAPABILITY_STANDARD),        //SCK
     P14(ID_P14,MICROBIT_PIN_P14,PIN_CAPABILITY_STANDARD),        //MISO
     P15(ID_P15,MICROBIT_PIN_P15,PIN_CAPABILITY_STANDARD),        //MOSI
-    P16(ID_P16,MICROBIT_PIN_P16,PIN_CAPABILITY_STANDARD),        //PIN 16
+    P16(ID_P16,MICROBIT_PIN_P16,PIN_CAPABILITY_STANDARD),        //PIN 16 (CM: P3)
     P19(ID_P19,MICROBIT_PIN_P19,PIN_CAPABILITY_STANDARD),        //SCL
     P20(ID_P20,MICROBIT_PIN_P20,PIN_CAPABILITY_STANDARD)         //SDA
+#ifdef TARGET_NRF51_CALLIOPE
+    ,
+    P21(ID_P21,MICROBIT_PIN_P21,PIN_CAPABILITY_ANALOG_IN)        // (CM: Microphone)
+#endif
 {
 }

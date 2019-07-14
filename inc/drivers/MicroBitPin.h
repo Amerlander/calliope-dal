@@ -21,6 +21,11 @@ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
+
+============================
+Modifications Copyright (c) 2016 Calliope GbR
+Modifications are provided by DELTA Systems (Georg Sommer) - Thomas Kern
+und Björn Eberhardt GbR by arrangement with Calliope GbR.
 */
 
 #ifndef MICROBIT_PIN_H
@@ -37,6 +42,40 @@ DEALINGS IN THE SOFTWARE.
 #define IO_STATUS_TOUCH_IN                  0x10        // Pin is a makey-makey style touch sensor
 #define IO_STATUS_EVENT_ON_EDGE             0x20        // Pin will generate events on pin change
 #define IO_STATUS_EVENT_PULSE_ON_EDGE       0x40        // Pin will generate events on pin change
+#define IO_STATUS_EVENTBUS_ENABLED          0x80        // Pin is will generate events on change
+
+#ifdef TARGET_NRF51_CALLIOPE
+
+// micro:bit compatibility pin settings for Calliope mini
+#define MICROBIT_PIN_P0                     PAD2        // CM: touch/analog pin P1
+#define MICROBIT_PIN_P1                     PAD3        // CM: touch/analog pin P2
+#define MICROBIT_PIN_P2                     A_RX        // CM: analog/rx pin (UART Grove)
+#define MICROBIT_PIN_P3                     COL1        //COL1 (ANALOG/DIGITAL)
+#define MICROBIT_PIN_P4                     COL2        //COL2 (ANALOG/DIGITAL)
+#define MICROBIT_PIN_P5                     BUTTON_A    //BTN_A
+#define MICROBIT_PIN_P6                     COL9        //COL9
+#define MICROBIT_PIN_P7                     COL8        //COL8
+#define MICROBIT_PIN_P8                     A_TX        // CM: analog/tx pin (UART Grove)
+#define MICROBIT_PIN_P9                     COL7        //COL7
+#define MICROBIT_PIN_P10                    COL3        //COL3 (ANALOG/DIGITAL)
+#define MICROBIT_PIN_P11                    BUTTON_B    //BTN_B
+#define MICROBIT_PIN_P12                    PAD1        // CM: touch pin P0
+#define MICROBIT_PIN_P13                    COL4        // CM: COL4/SCK
+#define MICROBIT_PIN_P14                    COL5        // CM: COL5/MISO
+#define MICROBIT_PIN_P15                    COL6        // CM: COL6/MOSI
+#define MICROBIT_PIN_P16                    PAD4        // CM: touch pin P3
+#define MICROBIT_PIN_P19                    SCL         //SCL
+#define MICROBIT_PIN_P20                    SDA         //SDA
+#define MICROBIT_PIN_P21                    MIC         // CM: analog microphone
+
+// special pins for Calliope mini (only used internally for drivers)
+#define CALLIOPE_PIN_MOTOR_SLEEP            MOTOR_NSLEEP  // motor driver sleep pin
+#define CALLIOPE_PIN_MOTOR_IN1              MOTOR_IN1     // motor driver pin 1 / sound
+#define CALLIOPE_PIN_MOTOR_IN2              MOTOR_IN2     // motor driver pin 2 / sound
+#define CALLIOPE_PIN_RGB_LED                RGBLED        // WS2812b RGB data pin
+#define CALLIOPE_PIN_ACCEL_INT              ACCEL_INT     // accelerometer interrupt pin
+
+#else
 
 //#defines for each edge connector pin
 #define MICROBIT_PIN_P0                     P0_3        //P0 is the left most pad (ANALOG/DIGITAL) used to be P0_3 on green board
@@ -59,17 +98,19 @@ DEALINGS IN THE SOFTWARE.
 #define MICROBIT_PIN_P19                    P0_0        //SCL
 #define MICROBIT_PIN_P20                    P0_30       //SDA
 
+#endif
+
 #define MICROBIT_PIN_MAX_OUTPUT             1023
 
 #define MICROBIT_PIN_MAX_SERVO_RANGE        180
 #define MICROBIT_PIN_DEFAULT_SERVO_RANGE    2000
 #define MICROBIT_PIN_DEFAULT_SERVO_CENTER   1500
-
+// config
 #define MICROBIT_PIN_EVENT_NONE             0
 #define MICROBIT_PIN_EVENT_ON_EDGE          1
 #define MICROBIT_PIN_EVENT_ON_PULSE         2
 #define MICROBIT_PIN_EVENT_ON_TOUCH         3
-
+// event output
 #define MICROBIT_PIN_EVT_RISE               2
 #define MICROBIT_PIN_EVT_FALL               3
 #define MICROBIT_PIN_EVT_PULSE_HI           4

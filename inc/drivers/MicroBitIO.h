@@ -21,6 +21,11 @@ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
+
+========================
+Modifications Copyright (c) 2016 Calliope GbR
+Modifications are provided by DELTA Systems (Georg Sommer) - Thomas Kern
+und Björn Eberhardt GbR by arrangement with Calliope GbR.
 */
 
 #ifndef MICROBIT_IO_H
@@ -60,6 +65,9 @@ class MicroBitIO
     MicroBitPin          P16;
     MicroBitPin          P19;
     MicroBitPin          P20;
+#ifdef TARGET_NRF51_CALLIOPE
+    MicroBitPin          P21;
+#endif
 
     /**
       * Constructor.
@@ -75,7 +83,11 @@ class MicroBitIO
                int ID_P9, int ID_P10,int ID_P11,
                int ID_P12,int ID_P13,int ID_P14,
                int ID_P15,int ID_P16,int ID_P19,
-               int ID_P20);
+               int ID_P20
+#ifdef TARGET_NRF51_CALLIOPE
+               , int ID_P21
+#endif
+	 );
 };
 
 #endif

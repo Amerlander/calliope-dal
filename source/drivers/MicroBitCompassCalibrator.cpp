@@ -68,7 +68,7 @@ MicroBitCompassCalibrator::MicroBitCompassCalibrator(MicroBitCompass& _compass, 
  * @param compass The compass instance to calibrate.
  * @param accelerometer The accelerometer to gather contextual data from.
  * @param display The LED matrix to display user feedback on.
- * @param storage The object to use for storing calibration data in persistent FLASH. 
+ * @param storage The object to use for storing calibration data in persistent FLASH.
  */
 MicroBitCompassCalibrator::MicroBitCompassCalibrator(MicroBitCompass& _compass, MicroBitAccelerometer& _accelerometer, MicroBitDisplay& _display, MicroBitStorage &storage) : compass(_compass), accelerometer(_accelerometer), display(_display)
 {
@@ -95,7 +95,7 @@ MicroBitCompassCalibrator::MicroBitCompassCalibrator(MicroBitCompass& _compass, 
  * @param data a collection of data points
  * @param samples the number of samples in the 'data' array
  *
- * @return The deviation between the closest and further point in the data array from the point given. 
+ * @return The deviation between the closest and further point in the data array from the point given.
  */
 float MicroBitCompassCalibrator::measureScore(Sample3D &c, Sample3D *data, int samples)
 {
@@ -186,7 +186,7 @@ CompassCalibration MicroBitCompassCalibrator::spherify(Sample3D centre, Sample3D
         scale = max(scale, s);
 
         // next, determine the scale effect this has on each of our components.
-        float dx = (data[i].x - centre.x); 
+        float dx = (data[i].x - centre.x);
         float dy = (data[i].y - centre.y);
         float dz = (data[i].z - centre.z);
 
@@ -334,7 +334,6 @@ void MicroBitCompassCalibrator::calibrateUX(MicroBitEvent)
         if (remaining_scroll_time == MSG_TIME || remaining_scroll_time <= -REDISPLAY_MSG_TIMEOUT_MS)        {
                 display.clear();
                 display.scrollAsync("TILT TO FILL SCREEN "); // Takes about 14s
-
                 remaining_scroll_time = MSG_TIME;
                 samples_this_period = 0;
         }
@@ -407,7 +406,7 @@ void MicroBitCompassCalibrator::calibrateUX(MicroBitEvent)
         remaining_scroll_time-=TIME_STEP;
     }
 
-    CompassCalibration cal = calibrate(data, samples); 
+    CompassCalibration cal = calibrate(data, samples);
     compass.setCalibration(cal);
 
     if(this->storage)
